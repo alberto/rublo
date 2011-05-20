@@ -1,7 +1,7 @@
 require_relative 'template_parser_test'
 require_relative 'post_test'
-
-test_classes = [PostTest, TemplateParserTest]
+require_relative 'post_repository_test'
+test_classes = [PostTest, TemplateParserTest, PostRepositoryTest]
 
 test_classes.each do |klass|
   k = klass.new
@@ -9,6 +9,7 @@ test_classes.each do |klass|
   methods.each do |method|
     k.send(method)
     puts method.to_s
+    puts 
   end
 end
 

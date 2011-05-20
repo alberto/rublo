@@ -10,4 +10,12 @@ class Test
   def not_equals expected, actual
     "Expected #{expected.inspect}, but got #{actual.inspect}"
   end
+
+  def assert_fail
+    puts "Test failed"
+  end
+
+  def assert_pass
+    assert_equals true, true
+  end
 end
