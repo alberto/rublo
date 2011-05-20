@@ -1,7 +1,7 @@
-require_relative 'post_generator_test'
+require_relative 'template_parser_test'
 require_relative 'post_test'
 
-test_classes = [PostTest, PostGeneratorTest]
+test_classes = [PostTest, TemplateParserTest]
 
 test_classes.each do |klass|
   k = klass.new
