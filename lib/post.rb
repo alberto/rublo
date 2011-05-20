@@ -3,5 +3,11 @@ class Post
 
   def initialize attributes
     @attributes = attributes
+    @attributes['slug'] ||= slug
+  end
+
+private
+  def slug
+    @attributes['title'].downcase.strip.gsub(' ', '-')
   end
 end

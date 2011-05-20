@@ -29,9 +29,9 @@ class PostGeneratorTest < Test
   end
 
   def generate_ignores_unknown_attributes
-    post = Post.new("foo" => "Foo")
+    post = Post.new('title' => 'The title', "foo" => "Foo")
     generator = PostGenerator.new ('<h2>##title##</h2>')
     generated_post = generator.generate post
-    assert_equals('<h2>##title##</h2>', generated_post)
+    assert_equals('<h2>The title</h2>', generated_post)
   end
 end

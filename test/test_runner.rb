@@ -7,8 +7,8 @@ test_classes.each do |klass|
   k = klass.new
   methods = k.methods - Object.methods - Test.instance_methods
   methods.each do |method|
-    puts method.to_s
     k.send(method)
+    puts method.to_s
   end
 end
 

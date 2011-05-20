@@ -1,13 +1,13 @@
 class Test
   def assert_equals expected, actual
     if expected == actual
-      p "ok"
+      puts 'ok'
     else
-      p not_equals(expected, actual)
+      puts not_equals(expected, actual)
     end    
   end
 
   def not_equals expected, actual
-    "Expected #{expected}, but got #{actual}"
+    "Expected #{expected.inspect}, but got #{actual.inspect}"
   end
 end
