@@ -1,17 +1,6 @@
 require_relative '../lib/post'
+require_relative '../lib/post_generator'
 require_relative 'test'
-
-class PostGenerator
-  def initialize template
-    @template = template
-  end
-  def generate post
-    post.attributes.each_pair do |key, value|
-      @template.gsub!("###{key}##", value)
-    end
-    @template
-  end
-end
 
 class PostGeneratorTest < Test
   def generate_replaces_title_in_template
