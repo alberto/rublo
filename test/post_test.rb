@@ -24,4 +24,10 @@ class PostTest < Test
     post = Post.new('title' => 'The title', 'slug' => 'a-custom-slug')
     assert_equals('a-custom-slug', post.attributes["slug"])
   end
+
+  def slug_does_not_contain_special_chars
+    post = Post.new('title' => "The title 2.0")
+    assert_equals('the-title-20', post.attributes["slug"])
+  end
+
 end

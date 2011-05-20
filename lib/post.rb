@@ -8,6 +8,6 @@ class Post
 
 private
   def slug
-    @attributes['title'].downcase.strip.gsub(' ', '-')
+    @attributes['title'].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 end
