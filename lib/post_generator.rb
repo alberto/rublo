@@ -6,7 +6,7 @@ class PostGenerator
 
   def self.relative_dir_path_for post
     slug = post.attributes['slug']
-    date = post.attributes['date'].gsub!('-', '/')
+    date = post.attributes['date'].gsub('-', '/')
     path = "/#{date}/#{slug}/"
   end
 
