@@ -2,6 +2,7 @@ class TemplateParser
   def initialize template
     @template = template
   end
+
   def parse fields
     parsed_file = @template
     fields.each_pair do |key, value|

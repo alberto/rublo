@@ -13,9 +13,8 @@ end
 
 class PostGeneratorTest < Test
   def gets_path_from_date_and_slug
-    generator = PostGenerator.new(nil, nil)
     post = Post.new('title' => "The title", 'date' => '2011-05-20')
-    path = generator.relative_dir_path_for post
+    path = PostGenerator.relative_dir_path_for post
     assert_equals("/2011/05/20/the-title/", path)
   end
 
