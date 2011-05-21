@@ -13,7 +13,7 @@ template = File.read('post.rhtml')
 template_parser = TemplateParser.new(template)
 post = Post.new(yaml)
 
-post_path = File.dirname(__FILE__) + "/../posts" + PostGenerator.relative_dir_path_for(post)
+post_path = File.dirname(__FILE__) + "/../public" + PostGenerator.relative_dir_path_for(post)
 FileUtils.mkdir_p(post_path)
 f = File.new(post_path + 'index.html',  "w+")
 
