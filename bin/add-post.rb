@@ -6,6 +6,7 @@ require "fileutils"
 require_relative "../lib/post"
 require_relative "../lib/path"
 require_relative "../lib/post_generator"
+require_relative "../lib/yaml_post_generator"
 require_relative "../lib/post_repository"
 require_relative "../lib/template_parser"
 
@@ -19,5 +20,6 @@ FileUtils.mkdir_p(post_path)
 f = File.new(post_path + 'index.html',  "w+")
 
 post_generator = PostGenerator.new(f, template_parser)
-repository = PostRepository.new([post_generator])
+yaml_post_generator = YamlPostGenerator.new
+repository = PostRepository.new([post_generator, yaml_post_generator])
 repository.save(post)
