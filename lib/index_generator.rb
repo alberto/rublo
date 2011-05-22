@@ -9,7 +9,6 @@ class IndexGenerator
     posts = PostRepository.find_all
     parsed_posts = parse_partial posts
     parsed_index = @index_parser.parse('posts' => parsed_posts)
-    p parsed_index
     @io.write(parsed_index)
   end
 

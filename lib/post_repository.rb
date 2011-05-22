@@ -1,3 +1,4 @@
+require 'yaml'
 class InvalidPostException < Exception  
 end
 
@@ -14,8 +15,11 @@ class PostRepository
   end
 
   def self.find_all
-    post = Post.new('title' => 'The title', 'date' => '2011-05-1', 'body' => 'foo')
-    newer_post = Post.new('title' => 'Second title', 'date' => '2011-05-2', 'body' => 'bar')
-    [newer_post, post]    
+    yaml_files = YamlPostGenerator.find_all_files
+    posts = []
+    yaml_files.each do |yaml|
+      posts << Post.new(yaml)
+    end
+    posts
   end
 end

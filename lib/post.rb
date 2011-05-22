@@ -16,6 +16,10 @@ class Post
     true
   end
 
+  def ==(another_post)
+    self.attributes == another_post.attributes
+  end
+
 private
   def slug
     return nil if @attributes['title'].nil?
