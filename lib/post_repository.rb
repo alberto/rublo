@@ -20,6 +20,6 @@ class PostRepository
     yaml_files.each do |yaml|
       posts << Post.new(yaml)
     end
-    posts
+    posts.sort { |post, post2| post2.attributes['date'] <=> post.attributes['date'] }
   end
 end

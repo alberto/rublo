@@ -16,10 +16,8 @@ class PostRepositoryTest < Test
   end
 
   def can_retrieve_published_posts_from_yaml_using_yaml_post_generator
-
     new_find_all = <<EOM
       def self.find_all_files
-        @@was_called = true
       ['title' => "The title", 'date' => '2011-05-22']
       end
 EOM
@@ -29,6 +27,21 @@ EOM
       assert_equals("2011-05-22", posts[0].attributes['date'])
     end
   end
+
+  def published_posts_are_ordered_by_descending_date
+    new_find_all = <<EOM
+      def self.find_all_files
+      [{'title' => "The title", 'date' => '2011-05-12'}, 
+      {'title' => "Newer post", 'date' => '2011-05-22'}, ]
+      end
+EOM
+    with_replaced_method(YamlPostGenerator, 'find_all_files', new_find_all) do
+      posts = PostRepository.find_all
+      assert_equals("2011-05-22", posts[0].attributes['date'])
+      assert_equals("2011-05-12", posts[1].attributes['date'])
+    end
+  end
+
 end
 
 class GeneratorMock
