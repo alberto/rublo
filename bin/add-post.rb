@@ -4,6 +4,7 @@ require "yaml"
 require "fileutils"
 
 require_relative "../lib/post"
+require_relative "../lib/path"
 require_relative "../lib/post_generator"
 require_relative "../lib/post_repository"
 require_relative "../lib/template_parser"
@@ -13,7 +14,7 @@ template = File.read('post.rhtml')
 template_parser = TemplateParser.new(template)
 post = Post.new(yaml)
 
-post_path = File.dirname(__FILE__) + "/../public" + PostGenerator.relative_dir_path_for(post)
+post_path = File.dirname(__FILE__) + "/../public" + Path.path_for(post)
 FileUtils.mkdir_p(post_path)
 f = File.new(post_path + 'index.html',  "w+")
 

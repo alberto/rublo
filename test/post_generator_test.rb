@@ -12,12 +12,6 @@ class FakeTemplate
 end
 
 class PostGeneratorTest < Test
-  def gets_path_from_date_and_slug
-    post = Post.new('title' => "The title", 'date' => '2011-05-20')
-    path = PostGenerator.relative_dir_path_for post
-    assert_equals("/2011/05/20/the-title/", path)
-  end
-
   def calls_parse_on_template
     post = Post.new('title' => "The title", 'date' => '2011-05-20')
     io = StringIO.new("")
