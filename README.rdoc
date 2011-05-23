@@ -8,12 +8,14 @@ It is written in ruby, without using any external gem or library, in a TDD manne
 
 == usage
 You can create a new post by editing the post.yaml file and adding your info there.
-You must at least add a 'title' key.
-You can declare site wide vars (like your blog title) in the settings.yaml file
+
+You must at least add a 'title' key. You can declare site wide vars (like your blog title) in the settings.yaml file
 
 === template files
 rublo uses a rudimentary template system. All you can do is declare vars which will get substituted by your posts attributes. 
+
 Variables are declared using the format ##attribute##. (e.g. ##title##)
+
 There are 3 templates:
 - post.rhtml for the post page
 - index.rhtml for the index page
@@ -22,6 +24,7 @@ Edit them at your own will (and risk).
 
 === creating a new post
 After editing the post.yaml file, you can create your new post by running:
+
 ruby bin/add_post.rb
 
 === running the tests
