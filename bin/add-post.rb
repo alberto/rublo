@@ -29,6 +29,7 @@ index_path = public_path + "/index.html"
 index_file = File.new(index_path, "w+")
 posts_parser = TemplateParser.new(File.read("posts.rhtml"))
 index_parser = TemplateParser.new(File.read("index.rhtml"))
-index_generator = IndexGenerator.new(index_file, posts_parser, index_parser)
+settings = YAML.load_file("settings.yaml")
+index_generator = IndexGenerator.new(index_file, posts_parser, index_parser, settings)
 repository = PostRepository.new([post_generator, yaml_post_generator, index_generator])
 repository.save(post)
