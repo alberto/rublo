@@ -4,7 +4,7 @@ require_relative '../lib/path'
 class PathTest < Test
   def gets_path_from_date_and_slug
     post = Post.new('title' => "The title", 'date' => '2011-05-20')
-    path = Path.path_for post
+    path = post.attributes['uri']
     assert_equals("/2011/05/20/the-title/", path)
   end
 

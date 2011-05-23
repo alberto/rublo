@@ -7,6 +7,8 @@ class Post
   def initialize attributes
     @attributes = attributes
     @attributes['slug'] ||= slug
+    @attributes['date'] ||= Date.today.to_s
+    @attributes['uri'] = uri
   end
 
   def valid?
@@ -18,6 +20,12 @@ class Post
 
   def ==(another_post)
     self.attributes == another_post.attributes
+  end
+
+  def uri
+    slug = @attributes['slug']
+    date = @attributes['date'].gsub('-', '/')
+    path = "/#{date}/#{slug}/"
   end
 
 private
