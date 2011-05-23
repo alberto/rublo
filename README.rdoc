@@ -1,0 +1,32 @@
+= about rublo
+rublo is a very simplistic blog engine. It lets you write posts in yaml and generate them as html.
+
+== the challenge
+I created rublo as a response to Enrique Comba's (@ecomba) open challenge to anyone who wanted to become his apprentice (more info at http://ecomba.org/blog/2011/05/15/the-apprentice/ )
+
+It is written in ruby, without using any external gem or library, in a TDD manner and without using Test::Unit, as per Enrique's whises :D
+
+== usage
+You can create a new post by editing the post.yaml file and adding your info there.
+You must at least add a 'title' key.
+You can declare site wide vars (like your blog title) in the settings.yaml file
+
+=== template files
+rublo uses a rudimentary template system. All you can do is declare vars which will get substituted by your posts attributes. 
+Variables are declared using the format ##attribute##. (e.g. ##title##)
+There are 3 templates:
+- post.rhtml for the post page
+- index.rhtml for the index page
+- posts.rhtml partial template used to create the index page
+Edit them at your own will (and risk).
+
+=== creating a new post
+After editing the post.yaml file, you can create your new post by running:
+ruby bin/add_post.rb
+
+=== running the tests
+You can run the tests with:
+ruby test/test_runner.rb
+
+== help
+Do you like rublo? Tell @ecomba how awesome my blog is and how I deserve to be his apprentice. Do you think it is horrible? Then tell @ecomba how much I am in need for a mentor.
