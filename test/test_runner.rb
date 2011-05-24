@@ -12,9 +12,13 @@ test_classes.each do |klass|
   k = klass.new
   methods = k.methods - Object.methods - Test.instance_methods
   methods.each do |method|
-    k.send(method)
-    puts method.to_s
-    puts 
+    begin
+      k.send(method)
+      puts method.to_s
+      puts 
+    rescue
+      k.assert_fail
+    end
   end
 end
 
