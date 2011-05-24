@@ -1,3 +1,5 @@
+class TestException < Exception
+end
 class Test
   def initialize
     @failed = false
@@ -8,16 +10,14 @@ class Test
   end
 
   def assert_equals expected, actual    
-    if expected == actual
-      puts 'ok'
-    else
-      puts not_equals(expected, actual)
+    if expected != actual
+      raise TestException.new(not_equals(expected, actual))
       @failed = true
     end
   end
 
   def assert_fail message = "Test failed"
-    puts message
+    raise TestException.new(not_equals(expected, actual))
     @failed = true
   end
 

@@ -8,6 +8,19 @@ require_relative 'index_generator_test'
 
 test_classes = [PostTest, TemplateParserTest, PostRepositoryTest, SavingAValidPostTest, PostGeneratorTest, PathTest, YamlPostGeneratorTest, IndexGeneratorTest]
 
+def colorize(text, color_code)
+  puts "#{color_code}  #{text}\e[0m"
+end
+
+def red text
+  colorize(text, "\e[31m")
+end
+
+def green text
+  colorize(text, "\e[32m")
+end
+
+
 number_of_tests = 0
 failed_tests = 0
 test_classes.each do |klass|
@@ -17,16 +30,19 @@ test_classes.each do |klass|
   methods.each do |method|
     begin
       k = klass.new
-      puts method.to_s
       k.send(method)
+      green method.to_s
+    rescue TestException => e      
+      failed_tests +=1
+      red method.to_s
+      red e.message
     rescue Exception => e
-      k.assert_fail
+      failed_tests +=1
       puts e.message
       puts e.backtrace.inspect
-    ensure
-      failed_tests +=1 if k.failed?
     end
-  puts
   end
+  puts
 end
 puts "#{number_of_tests} tests run, #{failed_tests} failed"
+
