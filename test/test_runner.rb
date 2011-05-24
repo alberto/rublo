@@ -1,12 +1,9 @@
-require_relative 'template_parser_test'
-require_relative 'post_test'
-require_relative 'post_repository_test'
-require_relative 'post_generator_test'
-require_relative 'path_test'
-require_relative 'yaml_post_generator_test'
-require_relative 'index_generator_test'
+Dir.entries(File.dirname(__FILE__)).each do |file|
+  require_relative file if file =~ /_test\.rb/
+end
 
-test_classes = [PostTest, TemplateParserTest, PostRepositoryTest, SavingAValidPostTest, PostGeneratorTest, PathTest, YamlPostGeneratorTest, IndexGeneratorTest]
+require_relative 'test'
+
 
 def humanize text
   text.gsub!('_', ' ')
@@ -26,6 +23,7 @@ end
 
 number_of_tests = 0
 failed_tests = 0
+test_classes = Test.descendants
 test_classes.each do |klass|
   p klass
   methods = klass.new.methods - Object.methods - Test.instance_methods

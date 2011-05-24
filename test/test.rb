@@ -1,24 +1,19 @@
 class TestException < Exception
 end
-class Test
-  def initialize
-    @failed = false
-  end
 
-  def failed?
-    @failed
+class Test
+  def self.descendants
+    ObjectSpace.each_object(Class).select { |klass| klass < self }
   end
 
   def assert_equals expected, actual    
     if expected != actual
       raise TestException.new(not_equals(expected, actual))
-      @failed = true
     end
   end
 
   def assert_fail message = "Test failed"
-    raise TestException.new(not_equals(expected, actual))
-    @failed = true
+    raise TestException.new(message)
   end
 
   def assert_pass
