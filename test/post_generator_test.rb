@@ -18,7 +18,7 @@ class PostGeneratorTest < Test
     template = FakeTemplate.new
     generator = PostGenerator.new(io, template)
     generator.generate post
-    assert_equals(true, template.parse_was_called?)    
+    assert_true template.parse_was_called?
   end
 
   def writes_result_to_io

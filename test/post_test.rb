@@ -31,17 +31,17 @@ class PostTest < Test
 
   def a_post_with_title_and_date_is_valid
     post = Post.new({'title' => 'Title', 'date' => '2011-01-11'})
-    assert_equals(true, post.valid?)
+    assert_true post.valid?
   end
 
   def title_is_required
     post = Post.new({'date' => '2011-01-11'})
-    assert_equals(false, post.valid?)
+    assert_false post.valid?
   end
 
   def date_is_required
     post = Post.new({'title' => '2011-01-11'})
-    assert_equals(false, post.valid?)
+    assert_false post.valid?
   end
 
 end

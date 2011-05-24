@@ -18,6 +18,14 @@ class Test
   def assert_pass
     assert_equals true, true
   end
+
+  def assert_true actual
+    assert_equals true, actual
+  end
+
+  def assert_false actual
+    assert_equals false, actual
+  end
 end
 
 def with_replaced_method(cls, meth, new_impl)
