@@ -8,8 +8,12 @@ require_relative 'index_generator_test'
 
 test_classes = [PostTest, TemplateParserTest, PostRepositoryTest, SavingAValidPostTest, PostGeneratorTest, PathTest, YamlPostGeneratorTest, IndexGeneratorTest]
 
+def humanize text
+  text.gsub!('_', ' ')
+end
+
 def colorize(text, color_code)
-  puts "#{color_code}  #{text}\e[0m"
+  puts "#{color_code}  #{humanize text}\e[0m"
 end
 
 def red text
@@ -19,7 +23,6 @@ end
 def green text
   colorize(text, "\e[32m")
 end
-
 
 number_of_tests = 0
 failed_tests = 0
