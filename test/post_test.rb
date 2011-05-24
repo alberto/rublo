@@ -2,7 +2,7 @@ require_relative '../lib/post.rb'
 
 class PostTest < Test
   def can_set_post_title
-    post = Post.new('title' => 'The title')    
+    post = Post.new('title' => 'The title')
     assert_equals('The title', post.attributes["title"])
   end
 
@@ -39,9 +39,9 @@ class PostTest < Test
     assert_false post.valid?
   end
 
-  def date_is_required
-    post = Post.new({'title' => '2011-01-11'})
-    assert_false post.valid?
+  def uses_current_date_if_not_supplied
+    post = Post.new({'title' => 'The title'})
+    assert_equals Date.today.to_s, post.attributes["date"]
   end
 
 end

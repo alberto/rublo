@@ -4,15 +4,15 @@ class Test
       puts 'ok'
     else
       puts not_equals(expected, actual)
-    end    
+    end
   end
 
   def not_equals expected, actual
     "Expected #{expected.inspect}, but got #{actual.inspect}"
   end
 
-  def assert_fail
-    puts "Test failed"
+  def assert_fail message = "Test failed"
+    puts message
   end
 
   def assert_pass

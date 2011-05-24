@@ -10,15 +10,18 @@ test_classes = [PostTest, TemplateParserTest, PostRepositoryTest, SavingAValidPo
 
 test_classes.each do |klass|
   k = klass.new
+  p klass
   methods = k.methods - Object.methods - Test.instance_methods
   methods.each do |method|
     begin
-      k.send(method)
       puts method.to_s
-      puts 
-    rescue
+      k.send(method)
+    rescue Exception => e
       k.assert_fail
+      puts e.message
+      puts e.backtrace.inspect
     end
+  puts
   end
 end
 
