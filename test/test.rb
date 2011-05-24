@@ -7,10 +7,6 @@ class Test
     end
   end
 
-  def not_equals expected, actual
-    "Expected #{expected.inspect}, but got #{actual.inspect}"
-  end
-
   def assert_fail message = "Test failed"
     puts message
   end
@@ -26,6 +22,11 @@ class Test
   def assert_false actual
     assert_equals false, actual
   end
+
+  private
+    def not_equals expected, actual
+      "Expected #{expected.inspect}, but got #{actual.inspect}"
+    end
 end
 
 def with_replaced_method(cls, meth, new_impl)
@@ -38,6 +39,7 @@ def with_replaced_method(cls, meth, new_impl)
     return result
 end
 
+private
 def replace_class_method(cls, meth, new_impl)
   cls.class_eval("class << self; alias_method :old_#{meth}, :#{meth}; end")
   cls.class_eval(new_impl)
