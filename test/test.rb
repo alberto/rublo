@@ -1,14 +1,24 @@
 class Test
-  def assert_equals expected, actual
+  def initialize
+    @failed = false
+  end
+
+  def failed?
+    @failed
+  end
+
+  def assert_equals expected, actual    
     if expected == actual
       puts 'ok'
     else
       puts not_equals(expected, actual)
+      @failed = true
     end
   end
 
   def assert_fail message = "Test failed"
     puts message
+    @failed = true
   end
 
   def assert_pass
