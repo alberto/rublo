@@ -7,8 +7,12 @@ class IndexGenerator
   end
 
   def generate post
-    parsed_index = @index_parser.parse(index_model)
-    @io.write(parsed_index)
+    io = @io.new(Paths.index_path, 'w+')
+    io.write(parsed_index)
+  end
+
+  def parsed_index
+    @index_parser.parse(index_model)    
   end
 
   def index_model

@@ -39,8 +39,4 @@ class YamlPostGeneratorTest < Test
         File.dirname(__FILE__) + '/../posts/2011-05-22-title.yaml'),
       File.expand_path(dest))
   end
-
-  def gets_yaml_from_io
-    YamlPostGenerator.find_all_files
-  end
 end

@@ -10,7 +10,7 @@ end
 
 class IndexGeneratorTest < Test
   def can_generate_partial_html_from_posts
-    io = StringIO.new("")
+    io = StringIO
     posts_template = "<p>##title## - ##date##</p>"
     posts_parser = TemplateParser.new posts_template
     index_generator = IndexGenerator.new(io, posts_parser, nil)
@@ -21,11 +21,11 @@ class IndexGeneratorTest < Test
   end
 
   def can_generate_index_page
-    io = StringIO.new("")
+    io = StringIO
     index_template = "<div>##posts##</div>"
     parser = TemplateParser.new index_template
     index_generator = IndexGeneratorStub.new(io, nil, parser)
-    index_generator.generate Post.new({'title' => 'titke', 'date' => '2011-12-13'})
-    assert_equals("<div><p>parsed posts</p></div>", io.string)
+    parsed = index_generator.parsed_index
+    assert_equals("<div><p>parsed posts</p></div>", parsed)
   end
 end
