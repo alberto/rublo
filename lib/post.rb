@@ -2,6 +2,8 @@ class RequiredFieldException < Exception
 end
 
 class Post
+  include Comparable
+
   attr_reader :attributes
 
   def initialize attributes
@@ -26,6 +28,10 @@ class Post
     slug = @attributes['slug']
     date = @attributes['date'].gsub('-', '/')
     path = "/#{date}/#{slug}/"
+  end
+
+  def <=> other
+    other.attributes['date'] <=> self.attributes['date']
   end
 
 private

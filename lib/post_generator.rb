@@ -6,7 +6,10 @@ class PostGenerator
   end
 
   def generate post
-    parsed_template = @template.parse @settings.merge(post.attributes)
-    @io.write(parsed_template)
+    @io.write(parsed post)
+  end
+
+  def parsed post
+    @template.parse @settings.merge(post.attributes)
   end
 end

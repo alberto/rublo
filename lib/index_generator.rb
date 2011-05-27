@@ -7,11 +7,14 @@ class IndexGenerator
   end
 
   def generate post
-    posts = PostRepository.find_all
-    parsed_posts = parse_partial posts
-    index_model = @settings.merge 'posts' => parsed_posts
     parsed_index = @index_parser.parse(index_model)
     @io.write(parsed_index)
+  end
+
+  def index_model
+    posts = PostRepository.find_all
+    parsed_posts = parse_partial posts
+    @settings.merge 'posts' => parsed_posts
   end
 
   def parse_partial posts

@@ -9,6 +9,10 @@ class PostRepository
 
   def save post
     raise InvalidPostException.new unless post.valid?
+    run_generators_for post
+  end
+
+  def run_generators_for post
     @generators.each do |generator|
       generator.generate post
     end
@@ -16,10 +20,14 @@ class PostRepository
 
   def self.find_all
     yaml_files = YamlPostGenerator.find_all_files
+    posts_from(yaml_files)
+  end
+
+  def self.posts_from yaml_files
     posts = []
     yaml_files.each do |yaml|
       posts << Post.new(yaml)
     end
-    posts.sort { |post, post2| post2.attributes['date'] <=> post.attributes['date'] }
+    posts.sort
   end
 end
