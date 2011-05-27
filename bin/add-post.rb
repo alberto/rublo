@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require "fileutils"
-
 require_relative "../lib/post"
 require_relative "factory"
 
