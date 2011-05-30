@@ -3,51 +3,33 @@ Dir.entries(File.dirname(__FILE__)).each do |file|
 end
 
 require_relative 'test'
+require_relative 'commandline_formatter'
 
 class TestRunner
-  def run
+  def run(formatter = CommandLineFormatter.new)
     number_of_tests = 0
     failed_tests = 0
     test_classes = Test.descendants
     test_classes.each do |klass|
-      p klass
+      formatter.test_fixture_start(klass)
       methods = klass.new.methods - Object.methods - Test.instance_methods
       number_of_tests += methods.count
       methods.each do |method|
         begin
           k = klass.new
           k.send(method)
-          green humanize(method.to_s)
-        rescue TestException => e      
+          formatter.test_passed method.to_s
+        rescue TestException => e
+          formatter.test_failed method.to_s, e.message
           failed_tests +=1
-          red humanize(method.to_s)
-          red e.message
         rescue Exception => e
+          formatter.test_failed method.to_s, e.message, e        
           failed_tests +=1
-          puts e.message
-          puts e.backtrace.inspect
         end
       end
-      puts
+      formatter.test_fixture_end(klass)
     end
-    puts "#{number_of_tests} tests run, #{failed_tests} failed"    
-  end
-  
-  def humanize text
-    text.gsub!('_', ' ')
-    text
-  end
-
-  def colorize(text, color_code)
-    puts "#{color_code}  #{text}\e[0m"
-  end
-
-  def red text
-    colorize(text, "\e[31m")
-  end
-
-  def green text
-    colorize(text, "\e[32m")
+    formatter.summary(number_of_tests, failed_tests)
   end
 end
 
