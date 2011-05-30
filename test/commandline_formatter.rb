@@ -1,9 +1,9 @@
 class CommandLineFormatter
-  def test_fixture_start fixture_name
+  def fixture_start fixture_name
     p fixture_name
   end
   
-  def test_fixture_end fixture_name
+  def fixture_end fixture_name
     puts
   end
 
