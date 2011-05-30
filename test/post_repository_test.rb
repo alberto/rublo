@@ -2,6 +2,7 @@ require_relative '../lib/post'
 require_relative '../lib/post_repository'
 require_relative '../lib/yaml_post_generator'
 require_relative 'test'
+require_relative 'post_factory'
 
 class PostRepositoryTest < Test
   def cannot_save_an_invalid_post
@@ -54,7 +55,7 @@ end
 
 class SavingAValidPostTest < Test
   def initialize
-    @post = Post.new('title' => 'The title', 'date' => 'date')
+    @post = PostFactory.create(:default)
     @generator = GeneratorMock.new
     @repository = PostRepository.new([@generator])
   end

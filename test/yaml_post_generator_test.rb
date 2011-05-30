@@ -1,4 +1,5 @@
 require_relative '../lib/yaml_post_generator'
+require_relative 'post_factory'
 require 'fileutils'
 
 module FileUtils
@@ -23,7 +24,7 @@ end
 class YamlPostGeneratorTest < Test
   def creates_posts_directory_if_it_doesnt_exist
     generator = YamlPostGenerator.new
-    post = Post.new("title" => "title", "date" => '2011-05-22')
+    post = PostFactory.create(:default)
     generator.generate post
     expected_path = File.expand_path(File.dirname(__FILE__) + '/../posts')
     assert_equals(expected_path, File.expand_path(FileUtils.mkdir_p_args))
@@ -31,12 +32,12 @@ class YamlPostGeneratorTest < Test
 
   def copies_yaml_file_to_posts_dir
     generator = YamlPostGenerator.new
-    post = Post.new("title" => "title", "date" => '2011-05-22')
+    post = PostFactory.create(:default)
     generator.generate post
     src, dest = FileUtils.cp_args
     assert_equals('post.yaml', src)
     assert_equals(File.expand_path(
-        File.dirname(__FILE__) + '/../posts/2011-05-22-title.yaml'),
+        File.dirname(__FILE__) + '/../posts/2011-05-20-the-title.yaml'),
       File.expand_path(dest))
   end
 end

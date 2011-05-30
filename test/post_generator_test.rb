@@ -1,5 +1,6 @@
 require 'stringio'
 require_relative '../lib/post_generator'
+require_relative 'post_factory'
 
 class FakeTemplate
   def parse post
@@ -23,7 +24,7 @@ end
 
 class PostGeneratorTest < Test
   def calls_parse_on_template
-    post = Post.new('title' => "The title", 'date' => '2011-05-20')
+    post = PostFactory.create(:default)
     io = StringIO
     template = FakeTemplate.new
     generator = PostGenerator.new(io, template)
@@ -32,7 +33,7 @@ class PostGeneratorTest < Test
   end
 
   def writes_result_to_io
-    post = Post.new('title' => "The title", 'date' => '2011-05-20')
+    post = PostFactory.create(:default)
     io = FakeIO  
     generator = PostGenerator.new(io, FakeTemplate.new)
     generator.generate post

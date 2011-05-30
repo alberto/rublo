@@ -1,4 +1,5 @@
 require_relative '../lib/post.rb'
+require_relative 'post_factory'
 
 class PostTest < Test
   def can_set_post_title
@@ -30,7 +31,7 @@ class PostTest < Test
   end
 
   def a_post_with_title_and_date_is_valid
-    post = Post.new({'title' => 'Title', 'date' => '2011-01-11'})
+    post = PostFactory.create(:default)
     assert_true post.valid?
   end
 
