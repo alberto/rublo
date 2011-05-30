@@ -12,9 +12,9 @@ You can create a new post by editing the post.yaml file and adding your info the
 You must at least add a 'title' key. You can declare site wide vars (like your blog title) in the settings.yaml file
 
 === template files
-rublo uses a rudimentary template system. All you can do is declare vars which will get substituted by your posts attributes. 
+rublo uses a rudimentary template system. All you can do is declare vars which will get substituted by your posts fields. 
 
-Variables are declared using the format ##attribute##. (e.g. ##title##)
+Variables are declared using the format ##field##. (e.g. ##title##)
 
 There are 3 templates:
 - post.rhtml for the post page

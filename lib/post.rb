@@ -5,6 +5,7 @@ class Post
   include Comparable
 
   attr_reader :attributes
+  alias_method :fields, :attributes
 
   def initialize attributes
     @attributes = attributes

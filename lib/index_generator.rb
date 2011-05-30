@@ -24,7 +24,7 @@ class IndexGenerator
   def parse_partial posts
     parsed = ""
     posts.each do |post|
-      parsed << @posts_parser.parse(post.attributes)
+      parsed << @posts_parser.parse(post.fields)
     end
     parsed
   end

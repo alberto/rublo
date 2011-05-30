@@ -13,6 +13,6 @@ class PostGenerator
   end
 
   def parsed post
-    @template.parse @settings.merge(post.attributes)
+    @template.parse @settings.merge(post.fields)
   end
 end

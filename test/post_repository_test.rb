@@ -23,8 +23,8 @@ class PostRepositoryTest < Test
 EOM
     with_replaced_method(YamlPostGenerator, 'find_all_files', new_find_all) do
       posts = PostRepository.find_all
-      assert_equals("The title", posts[0].attributes['title'])
-      assert_equals("2011-05-22", posts[0].attributes['date'])
+      assert_equals("The title", posts[0].fields['title'])
+      assert_equals("2011-05-22", posts[0].fields['date'])
     end
   end
 
@@ -37,8 +37,8 @@ EOM
 EOM
     with_replaced_method(YamlPostGenerator, 'find_all_files', new_find_all) do
       posts = PostRepository.find_all
-      assert_equals("2011-05-22", posts[0].attributes['date'])
-      assert_equals("2011-05-12", posts[1].attributes['date'])
+      assert_equals("2011-05-22", posts[0].fields['date'])
+      assert_equals("2011-05-12", posts[1].fields['date'])
     end
   end
 
