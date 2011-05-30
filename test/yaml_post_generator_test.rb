@@ -22,18 +22,18 @@ module FileUtils
 end
 
 class YamlPostGeneratorTest < Test
-  def creates_posts_directory_if_it_doesnt_exist
+  def initialize
     generator = YamlPostGenerator.new
     post = PostFactory.create(:default)
-    generator.generate post
+    generator.generate post    
+  end
+
+  def creates_posts_directory_if_it_doesnt_exist
     expected_path = File.expand_path(File.dirname(__FILE__) + '/../posts')
     assert_equals(expected_path, File.expand_path(FileUtils.mkdir_p_args))
   end
 
   def copies_yaml_file_to_posts_dir
-    generator = YamlPostGenerator.new
-    post = PostFactory.create(:default)
-    generator.generate post
     src, dest = FileUtils.cp_args
     assert_equals('post.yaml', src)
     assert_equals(File.expand_path(

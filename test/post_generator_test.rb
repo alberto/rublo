@@ -1,4 +1,3 @@
-require 'stringio'
 require_relative '../lib/post_generator'
 require_relative 'post_factory'
 
@@ -23,20 +22,19 @@ class FakeIO
 end
 
 class PostGeneratorTest < Test
-  def calls_parse_on_template
+  def initialize
     post = PostFactory.create(:default)
-    io = StringIO
-    template = FakeTemplate.new
-    generator = PostGenerator.new(io, template)
-    generator.generate post
-    assert_true template.parse_was_called?
+    @io = FakeIO
+    @template = FakeTemplate.new
+    generator = PostGenerator.new(@io, @template)
+    generator.generate post    
+  end
+
+  def calls_parse_on_template
+    assert_true @template.parse_was_called?
   end
 
   def writes_result_to_io
-    post = PostFactory.create(:default)
-    io = FakeIO  
-    generator = PostGenerator.new(io, FakeTemplate.new)
-    generator.generate post
-    assert_true(io.write_was_called?)
+    assert_true(@io.write_was_called?)
   end
 end

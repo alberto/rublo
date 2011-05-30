@@ -38,8 +38,7 @@ EOM
 EOM
     with_replaced_method(YamlPostGenerator, 'find_all_files', new_find_all) do
       posts = PostRepository.find_all
-      assert_equals("2011-05-22", posts[0].date)
-      assert_equals("2011-05-12", posts[1].date)
+      assert_true(posts[0].date > posts[1].date)
     end
   end
 
