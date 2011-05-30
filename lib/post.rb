@@ -4,40 +4,39 @@ end
 class Post
   include Comparable
 
-  attr_reader :attributes
-  alias_method :fields, :attributes
+  attr_reader :fields
 
-  def initialize attributes
-    @attributes = attributes
-    @attributes['slug'] ||= slug
-    @attributes['date'] ||= Date.today.to_s
-    @attributes['uri'] = uri
+  def initialize fields
+    @fields = fields
+    @fields['slug'] ||= slug
+    @fields['date'] ||= Date.today.to_s
+    @fields['uri'] = uri
   end
 
   def valid?
     %w{title date}.each do |field|
-      return false if @attributes[field].nil? or @attributes[field].empty?
+      return false if @fields[field].nil? or @fields[field].empty?
     end
     true
   end
 
   def ==(another_post)
-    self.attributes == another_post.attributes
+    self.fields == another_post.fields
   end
 
   def uri
-    slug = @attributes['slug']
-    date = @attributes['date'].gsub('-', '/')
+    slug = @fields['slug']
+    date = @fields['date'].gsub('-', '/')
     path = "/#{date}/#{slug}/"
   end
 
   def <=> other
-    other.attributes['date'] <=> self.attributes['date']
+    other.fields['date'] <=> self.fields['date']
   end
 
 private
   def slug
-    return nil if @attributes['title'].nil?
-    @attributes['title'].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+    return nil if @fields['title'].nil?
+    @fields['title'].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 end
