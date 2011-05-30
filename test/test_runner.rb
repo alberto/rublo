@@ -7,6 +7,7 @@ require_relative 'test'
 
 def humanize text
   text.gsub!('_', ' ')
+  text
 end
 
 def colorize(text, color_code)
