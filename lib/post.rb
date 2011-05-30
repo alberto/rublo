@@ -34,6 +34,10 @@ class Post
     other.fields['date'] <=> self.fields['date']
   end
 
+  def method_missing(meth, *args, &block)
+    @fields[meth.to_s]
+  end
+
 private
   def slug
     return nil if @fields['title'].nil?

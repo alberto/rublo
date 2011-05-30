@@ -16,7 +16,7 @@ class YamlPostGenerator
   def self.yaml_path_for post
     posts_dir = "/posts/"    
     post_filename = posts_dir + 
-    post.fields['date'].to_s + "-" + 
-    post.fields['slug'] + ".yaml"
+    post.date.to_s + "-" + 
+    post.slug + ".yaml"
   end
 end
